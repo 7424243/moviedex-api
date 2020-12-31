@@ -3,9 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
-const MOVIE = require('./movie-data.json')
-
-console.log(process.env.API_TOKEN)
+const MOVIES = require('./movie-data.json')
 
 const app = express()
 
@@ -24,8 +22,9 @@ app.use(function validateBearerToken(req, res, next) {
 })
 
 function handleGetMovie(req, res) {
-    let response = MOVIE
+    let response = MOVIES
     const {genre, country, avg_vote} = req.query
+    const numberAvgVote = Number(avg_vote)
     if(genre) {
         response = response.filter(movie => 
             movie.genre.toLowerCase().includes(genre.toLowerCase()))
@@ -34,9 +33,9 @@ function handleGetMovie(req, res) {
         response = response.filter(movie => 
             movie.country.toLowerCase().includes(country.toLowerCase()))
     }
-    if(avg_vote) {
+    if(numberAvgVote) {
         response = response.filter(movie =>
-            movie.avg_vote >= avg_vote)
+            movie.avg_vote >= numberAvgVote)
     }
     res.json(response)
 }
