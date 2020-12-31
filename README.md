@@ -2,7 +2,7 @@
 
 This project is a Thinkful assignment.
 
-Once started, this will run a local server on `http://localhost:8000`.
+Once started, this will run on a local server on `http://localhost:8000`.
 
 There is one endpoint:
 
